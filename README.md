@@ -1,34 +1,43 @@
-# Employee Presence Prediction
+# Employee Turnover Prediction System
 
 ## Project Overview
-This project predicts employee presence using Machine Learning and Python. It helps organizations analyze attendance data and predict employee presence based on historical records.
+
+This project is a web-based Employee Turnover Prediction System developed using Python, Flask, Machine Learning, HTML, CSS, JavaScript and MySQL.
+
+The system predicts whether an employee is likely to leave the organization based on employee information such as age, department, salary, experience, job satisfaction and performance rating.
 
 ---
 
 ## Features
-- Employee presence prediction
-- Machine Learning model
-- User-friendly Flask web application
-- Data preprocessing
-- Prediction using trained model
+
+- Employee Login
+- HR Manager Login
+- Admin Login
+- Employee Data Management
+- Employee Turnover Prediction
+- Machine Learning Model
+- Responsive Web Interface
 
 ---
 
 ## Technologies Used
+
 - Python
 - Flask
-- Pandas
-- NumPy
-- Scikit-learn
 - HTML
 - CSS
 - JavaScript
+- Bootstrap
+- MySQL
+- Pandas
+- NumPy
+- Scikit-learn
 
 ---
 
 ## Project Structure
 
-Employee-Presence-Prediction
+Employee-Turnover-Prediction
 
 ├── dataset
 
@@ -40,13 +49,13 @@ Employee-Presence-Prediction
 
 ├── train_model.py
 
+├── requirements.txt
+
 ├── model.pkl
 
 ├── encoder.pkl
 
 ├── scaler.pkl
-
-├── requirements.txt
 
 └── README.md
 
@@ -54,17 +63,34 @@ Employee-Presence-Prediction
 
 ## Installation
 
-1. Clone this repository
-2. Install the required packages
+Clone the repository
+
+Install dependencies
 
 pip install -r requirements.txt
 
-3. Run
+Run the application
 
 python app.py
 
 ---
 
+## Dataset
+
+IBM HR Analytics Employee Attrition Dataset
+
+---
+
+## Future Enhancements
+
+- Improve prediction accuracy
+- Deploy on cloud
+- Dashboard for HR Analytics
+- Real-time prediction
+
+---
+
 ## Author
 
-Kowsalya Saraswathi
+Kowsalya.R
+B.Tech Graduate
