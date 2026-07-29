@@ -90,6 +90,30 @@ IBM HR Analytics Employee Attrition Dataset
 
 ---
 
+## Project Screenshots
+
+### Home Page
+
+![Home Page](images/home.png)
+
+### Login Page
+
+![Login Page](images/login.png)
+
+### Dashboard
+
+![Dashboard](images/dashboard.png)
+
+### Prediction Page
+
+![Prediction Page](images/prediction.png)
+
+### Result Page
+
+![Result Page](images/result.png)
+
+---
+
 ## Author
 
 Kowsalya.R
