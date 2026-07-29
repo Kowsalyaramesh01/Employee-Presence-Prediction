@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Prediction Result - WorkforceAI</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Segoe UI;
+}
+
+body{
+background:#f4f7fb;
+display:flex;
+}
+
+/* SIDEBAR */
+
+.sidebar{
+width:240px;
+height:100vh;
+background:#081b4b;
+position:fixed;
+left:0;
+top:0;
+padding:25px 15px;
+color:white;
+}
+
+.sidebar h2{
+text-align:center;
+margin-bottom:40px;
+}
+
+.sidebar a{
+display:flex;
+align-items:center;
+gap:12px;
+padding:14px;
+margin-bottom:12px;
+border-radius:10px;
+color:white;
+text-decoration:none;
+transition:0.3s;
+}
+
+.sidebar a:hover,
+.sidebar a.active{
+background:white;
+color:#2f3cc8;
+}
+
+/* MAIN */
+
+.main{
+margin-left:240px;
+width:100%;
+}
+
+/* NAVBAR */
+
+.navbar{
+background:white;
+padding:18px 40px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+box-shadow:0 4px 10px rgba(0,0,0,0.08);
+}
+
+.logo{
+font-size:22px;
+font-weight:bold;
+color:#2f3cc8;
+}
+
+/* CONTENT */
+
+.content{
+padding:40px;
+display:flex;
+flex-direction:column;
+align-items:center;
+}
+
+/* RESULT CARD */
+
+.result-card{
+width:700px;
+background:white;
+border-radius:18px;
+padding:35px;
+box-shadow:0 12px 30px rgba(0,0,0,0.1);
+text-align:center;
+position:relative;
+overflow:hidden;
+margin-bottom:25px;
+}
+
+/* TOP BORDER */
+
+.result-card.leave::before{
+content:'';
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:6px;
+background:#ff3b3b;
+}
+
+.result-card.stay::before{
+content:'';
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:6px;
+background:#00a86b;
+}
+
+/* ICON */
+
+.result-icon{
+font-size:60px;
+margin-bottom:15px;
+}
+
+.leave-icon{color:#ff3b3b;}
+.stay-icon{color:#00a86b;}
+
+/* TITLE */
+
+.result-title{
+font-size:24px;
+font-weight:bold;
+margin-bottom:10px;
+}
+
+/* PROGRESS */
+
+.progress{
+margin:25px 0;
+background:#eee;
+border-radius:20px;
+overflow:hidden;
+height:18px;
+}
+
+.progress-bar{
+height:100%;
+text-align:right;
+padding-right:10px;
+color:white;
+font-size:12px;
+line-height:18px;
+}
+
+.leave-bar{background:#ff3b3b;}
+.stay-bar{background:#00a86b;}
+
+/* EXPLANATION BOX */
+
+.explanation{
+text-align:left;
+margin-top:20px;
+padding:20px;
+background:#f8f9ff;
+border-radius:12px;
+line-height:1.6;
+font-size:14px;
+color:#444;
+}
+
+/* BUTTONS */
+
+.actions{
+margin-top:25px;
+display:flex;
+justify-content:center;
+gap:15px;
+flex-wrap:wrap;
+}
+
+.btn{
+padding:12px 20px;
+border-radius:10px;
+text-decoration:none;
+font-size:14px;
+font-weight:500;
+transition:0.3s;
+}
+
+.btn-primary{
+background:#2f3cc8;
+color:white;
+}
+
+.btn-secondary{
+background:#eef1ff;
+color:#2f3cc8;
+}
+
+.btn:hover{
+transform:translateY(-2px);
+box-shadow:0 6px 15px rgba(0,0,0,0.15);
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+
+<div class="sidebar">
+
+<h2>WorkforceAI</h2>
+
+<a href="/hr_dashboard">
+<i class="fa fa-chart-line"></i> Dashboard
+</a>
+
+<a href="/predict">
+<i class="fa fa-search"></i> Predict
+</a>
+<a href="/predict" class="active">
+<i class="fa fa-chart-pie"></i> Result
+</a>
+<a href="/history">
+<i class="fa fa-clock"></i> History
+</a>
+
+<a href="/logout">
+<i class="fa fa-sign-out-alt"></i> Logout
+</a>
+
+</div>
+
+<!-- MAIN -->
+
+<div class="main">
+
+<!-- NAVBAR -->
+
+<div class="navbar">
+<div class="logo">Prediction Result</div>
+<div>Welcome HR</div>
+</div>
+
+<!-- CONTENT -->
+
+<div class="content">
+
+<!-- ================= SINGLE RESULT ================= -->
+
+{% if mode == "single" %}
+
+<div class="result-card {% if prediction == 1 %}leave{% else %}stay{% endif %}">
+
+<div class="result-icon {% if prediction == 1 %}leave-icon{% else %}stay-icon{% endif %}">
+{% if prediction == 1 %}
+<i class="fa fa-times-circle"></i>
+{% else %}
+<i class="fa fa-check-circle"></i>
+{% endif %}
+</div>
+
+<div class="result-title">
+{{ result_title }}
+</div>
+
+<p><b>{{ risk_level }}</b></p>
+
+<p><b>Probability:</b> {{ prob }}%</p>
+
+<div class="progress">
+<div class="progress-bar {% if prediction == 1 %}leave-bar{% else %}stay-bar{% endif %}"
+style="width: {{ prob }}%;">
+{{ prob }}%
+</div>
+</div>
+
+<div class="explanation">
+<h3>Summary</h3>
+<p>{{ summary }}</p>
+</div>
+
+<div class="explanation">
+<h3>SHAP Explanation</h3>
+<ul>
+{% for f in positive %}
+<li>⚠️ {{ f }}</li>
+{% endfor %}
+{% for f in negative %}
+<li>✅ {{ f }}</li>
+{% endfor %}
+</ul>
+</div>
+
+<div class="explanation">
+<h3>Detailed Explanation</h3>
+<p>{{ explanation }}</p>
+</div>
+
+<div class="explanation">
+<h3>HR Recommendation</h3>
+<p>{{ hr_action }}</p>
+</div>
+
+</div>
+
+{% endif %}
+
+<!-- ================= BULK RESULT ================= -->
+{% if mode == "bulk" %}
+
+<!-- 🔥 SUMMARY TABLE -->
+
+<div style="width:90%; margin-bottom:30px;">
+
+<h2 style="margin-bottom:15px;">Bulk Summary</h2>
+
+<table style="width:100%; border-collapse:collapse; background:white; border-radius:10px; overflow:hidden;">
+
+<tr style="background:#2f3cc8; color:white;">
+<th style="padding:12px;">Employee</th>
+<th>Probability</th>
+<th>Risk</th>
+</tr>
+
+{% for r in results %}
+<tr style="text-align:center; border-bottom:1px solid #eee;">
+<td style="padding:10px;">Employee {{ r.id }}</td>
+<td>{{ r.prob }}%</td>
+<td style="color:{% if r.risk=='High Exit Risk' %}red{% else %}green{% endif %}; font-weight:bold;">
+{{ r.risk }}
+</td>
+</tr>
+{% endfor %}
+
+</table>
+
+</div>
+
+{% endif %}
+{% if mode == "bulk" %}
+
+{% for r in results %}
+
+<div class="result-card {% if r.risk == 'High Exit Risk' %}leave{% else %}stay{% endif %}">
+
+<div class="result-title">
+Employee {{ r.id }} — {{ r.risk }}
+</div>
+
+<p><b>Probability:</b> {{ r.prob }}%</p>
+
+<div class="progress">
+<div class="progress-bar {% if r.risk == 'High Exit Risk' %}leave-bar{% else %}stay-bar{% endif %}"
+style="width: {{ r.prob }}%;">
+{{ r.prob }}%
+</div>
+</div>
+
+<div class="explanation">
+<h3>Summary</h3>
+<p>{{ r.summary }}</p>
+</div>
+
+<div class="explanation">
+<h3>SHAP Explanation</h3>
+<ul>
+{% for f in r.positive %}
+<li>⚠️ {{ f }}</li>
+{% endfor %}
+{% for f in r.negative %}
+<li>✅ {{ f }}</li>
+{% endfor %}
+</ul>
+</div>
+
+<div class="explanation">
+<h3>HR Recommendation</h3>
+<p>{{ r.action }}</p>
+</div>
+
+</div>
+
+{% endfor %}
+
+{% endif %}
+
+<!-- ACTION BUTTONS -->
+
+<div class="actions">
+
+<a href="/predict" class="btn btn-primary">
+🔍 New Prediction
+</a>
+
+<a href="/history" class="btn btn-secondary">
+📜 View History
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+</body>
+</html>

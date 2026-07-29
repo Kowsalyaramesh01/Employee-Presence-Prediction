@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Admin - Predictions</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Segoe UI;
+}
+
+body{
+background:#f4f7fb;
+display:flex;
+}
+
+/* SIDEBAR */
+
+.sidebar{
+width:240px;
+height:100vh;
+background:#081b4b;
+position:fixed;
+left:0;
+top:0;
+padding:25px 15px;
+color:white;
+}
+
+.sidebar h2{
+text-align:center;
+margin-bottom:40px;
+}
+
+.sidebar a{
+display:flex;
+align-items:center;
+gap:12px;
+padding:14px;
+margin-bottom:12px;
+border-radius:10px;
+color:white;
+text-decoration:none;
+transition:0.3s;
+}
+
+.sidebar a:hover{
+background:white;
+color:#2f3cc8;
+}
+
+.sidebar a.active{
+background:white;
+color:#2f3cc8;
+}
+
+/* MAIN */
+
+.main{
+margin-left:240px;
+width:100%;
+}
+
+/* NAVBAR */
+
+.navbar{
+background:white;
+padding:18px 40px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+box-shadow:0 4px 10px rgba(0,0,0,0.08);
+}
+
+.logo{
+font-size:22px;
+font-weight:bold;
+color:#2f3cc8;
+}
+
+/* TABLE */
+
+.container{
+padding:40px;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+background:white;
+border-radius:10px;
+overflow:hidden;
+box-shadow:0 10px 25px rgba(0,0,0,0.08);
+}
+
+th{
+background:#2f3cc8;
+color:white;
+padding:12px;
+font-size:14px;
+}
+
+td{
+padding:10px;
+border-bottom:1px solid #eee;
+font-size:13px;
+text-align:center;
+}
+
+tr:hover{
+background:#f9f9f9;
+}
+
+.badge-red{
+color:white;
+background:#ff4d4d;
+padding:5px 10px;
+border-radius:6px;
+}
+
+.badge-green{
+color:white;
+background:#28c76f;
+padding:5px 10px;
+border-radius:6px;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+
+<div class="sidebar">
+
+<h2>WorkforceAI</h2>
+
+<a href="/dashboard">
+<i class="fa fa-chart-line"></i> Dashboard
+</a>
+
+<a href="/view_users">
+<i class="fa fa-users"></i> HR Users
+</a>
+
+<a href="#" class="active">
+<i class="fa fa-chart-bar"></i> Predictions
+</a>
+
+<a href="/process1">
+<i class="fa fa-brain"></i> Train Model
+</a>
+
+<a href="/logout">
+<i class="fa fa-sign-out-alt"></i> Logout
+</a>
+
+</div>
+
+<!-- MAIN -->
+
+<div class="main">
+
+<!-- NAVBAR -->
+
+<div class="navbar">
+<div class="logo">Prediction Records</div>
+<div>Welcome {{ session['admin'] }}</div>
+</div>
+
+<!-- TABLE -->
+
+<div class="container">
+
+<table>
+
+<tr>
+<th>ID</th>
+<th>HR User</th>
+<th>Prediction</th>
+<th>Probability</th>
+<th>Date</th>
+<th>Input Data</th>
+</tr>
+
+{% for row in data %}
+<tr>
+
+<td>{{ row[0] }}</td>
+
+<td>{{ row[1] }}</td>
+
+<td>
+{% if row[3] == 1 %}
+<span class="badge-red">Leave</span>
+{% else %}
+<span class="badge-green">Stay</span>
+{% endif %}
+</td>
+
+<td>{{ (row[4]*100)|round(2) }}%</td>
+
+<td>{{ row[5] }}</td>
+
+<td style="max-width:300px;overflow:auto;">
+{{ row[2] }}
+</td>
+
+</tr>
+{% endfor %}
+
+</table>
+
+</div>
+
+</div>
+
+</body>
+</html>

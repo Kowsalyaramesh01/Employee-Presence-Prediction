@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Prediction History - WorkforceAI</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Segoe UI;
+}
+
+body{
+background:#f4f7fb;
+display:flex;
+}
+
+/* SIDEBAR */
+
+.sidebar{
+width:240px;
+height:100vh;
+background:#081b4b;
+position:fixed;
+left:0;
+top:0;
+padding:25px 15px;
+color:white;
+}
+
+.sidebar h2{
+text-align:center;
+margin-bottom:40px;
+}
+
+.sidebar a{
+display:flex;
+align-items:center;
+gap:12px;
+padding:14px;
+margin-bottom:12px;
+border-radius:10px;
+color:white;
+text-decoration:none;
+transition:0.3s;
+}
+
+.sidebar a:hover,
+.sidebar a.active{
+background:white;
+color:#2f3cc8;
+}
+
+/* MAIN */
+
+.main{
+margin-left:240px;
+width:100%;
+}
+
+/* NAVBAR */
+
+.navbar{
+background:white;
+padding:18px 40px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+box-shadow:0 4px 10px rgba(0,0,0,0.08);
+}
+
+.logo{
+font-size:22px;
+font-weight:bold;
+color:#2f3cc8;
+}
+
+/* CONTENT */
+
+.content{
+padding:30px 40px;
+}
+
+/* CARD */
+
+.card{
+background:white;
+padding:25px;
+border-radius:16px;
+box-shadow:0 10px 25px rgba(0,0,0,0.08);
+}
+
+/* TABLE */
+
+.table-container{
+overflow-x:auto;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+margin-top:15px;
+}
+
+thead{
+background:#f1f4ff;
+}
+
+th{
+padding:12px;
+text-align:left;
+font-size:13px;
+color:#555;
+}
+
+td{
+padding:14px 12px;
+border-top:1px solid #eee;
+font-size:14px;
+}
+
+tr:hover{
+background:#fafbff;
+}
+
+/* BADGES */
+
+.badge{
+padding:6px 12px;
+border-radius:20px;
+font-size:12px;
+font-weight:600;
+}
+
+.leave{
+background:#ffe5e5;
+color:#d63031;
+}
+
+.stay{
+background:#e6f7ee;
+color:#00a86b;
+}
+
+/* BACK BUTTON */
+
+.back-btn{
+display:inline-block;
+margin-top:20px;
+padding:10px 18px;
+background:#2f3cc8;
+color:white;
+border-radius:8px;
+text-decoration:none;
+font-size:14px;
+transition:0.3s;
+}
+
+.back-btn:hover{
+background:#1d2bb5;
+}
+
+/* HEADER */
+
+.header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:15px;
+}
+
+.header h2{
+font-size:20px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+
+<div class="sidebar">
+
+<h2>WorkforceAI</h2>
+
+<a href="/hr_dashboard">
+<i class="fa fa-chart-line"></i> Dashboard
+</a>
+
+<a href="/predict">
+<i class="fa fa-search"></i> Predict
+</a>
+
+<a href="/history" class="active">
+<i class="fa fa-clock"></i> History
+</a>
+
+<a href="/logout">
+<i class="fa fa-sign-out-alt"></i> Logout
+</a>
+
+</div>
+
+<!-- MAIN -->
+
+<div class="main">
+
+<!-- NAVBAR -->
+
+<div class="navbar">
+<div class="logo">Prediction History</div>
+<div>Welcome HR</div>
+</div>
+
+<!-- CONTENT -->
+
+<div class="content">
+
+<div class="card">
+
+<div class="header">
+<h2>Employee Prediction Records</h2>
+</div>
+
+<div class="table-container">
+
+<table>
+
+<thead>
+<tr>
+<th>ID</th>
+<th>Input Summary</th>
+<th>Prediction</th>
+<th>Probability</th>
+<th>Date</th>
+</tr>
+</thead>
+
+<tbody>
+
+{% for row in data %}
+<tr>
+
+<td>{{ row[0] }}</td>
+
+<td style="max-width:250px; overflow:hidden; text-overflow:ellipsis;">
+{{ row[2] }}
+</td>
+
+<td>
+{% if row[3] == 1 %}
+<span class="badge leave">Leave</span>
+{% else %}
+<span class="badge stay">Stay</span>
+{% endif %}
+</td>
+
+<td><b>{{ row[4] }}%</b></td>
+
+<td>{{ row[5] }}</td>
+
+</tr>
+{% endfor %}
+
+</tbody>
+
+</table>
+
+</div>
+
+<a href="/hr_dashboard" class="back-btn">
+← Back to Dashboard
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+</body>
+</html>

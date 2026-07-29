@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Feature Classification - WorkforceAI</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Segoe UI;
+}
+
+body{
+background:#f4f7fb;
+display:flex;
+height:100vh;
+}
+
+/* SIDEBAR */
+
+.sidebar{
+width:240px;
+height:100vh;
+background:#081b4b;
+position:fixed;
+left:0;
+top:0;
+padding:25px 15px;
+color:white;
+}
+
+.sidebar h2{
+text-align:center;
+margin-bottom:40px;
+}
+
+.sidebar a{
+display:flex;
+align-items:center;
+gap:12px;
+padding:14px;
+margin-bottom:12px;
+border-radius:10px;
+color:white;
+text-decoration:none;
+transition:0.3s;
+font-weight:500;
+}
+
+.sidebar a:hover{
+background:white;
+color:#2f3cc8;
+}
+
+.sidebar a.active{
+background:white;
+color:#2f3cc8;
+font-weight:bold;
+}
+
+/* MAIN */
+
+.main{
+margin-left:240px;
+width:calc(100% - 240px);
+height:100vh;
+display:flex;
+flex-direction:column;
+}
+
+/* NAVBAR */
+
+.navbar{
+background:white;
+padding:18px 40px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+box-shadow:0 4px 10px rgba(0,0,0,0.08);
+}
+
+/* HEADER */
+
+.page-header{
+padding:25px 40px 10px 40px;
+}
+
+.page-header h2{
+font-size:26px;
+color:#333;
+}
+
+/* FEATURE CARDS */
+
+.features-container{
+padding:20px 40px;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+gap:25px;
+flex:1;
+}
+
+.feature-card{
+background:white;
+border-radius:16px;
+padding:25px;
+box-shadow:0 10px 25px rgba(0,0,0,0.08);
+display:flex;
+flex-direction:column;
+}
+
+.feature-card h3{
+margin-bottom:15px;
+color:#2f3cc8;
+}
+
+.feature-list{
+list-style:none;
+max-height:260px;
+overflow:auto;
+}
+
+.feature-list li{
+padding:10px;
+border-bottom:1px solid #eee;
+}
+
+/* NEXT BUTTON */
+
+.next-area{
+padding:0 40px 30px 40px;
+}
+
+.next-btn{
+display:inline-block;
+background:linear-gradient(135deg,#2f3cc8,#5663ff);
+color:white;
+padding:14px 30px;
+border-radius:10px;
+text-decoration:none;
+font-weight:bold;
+transition:0.3s;
+}
+
+.next-btn:hover{
+transform:translateY(-3px);
+box-shadow:0 8px 18px rgba(0,0,0,0.2);
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+
+<div class="sidebar">
+
+<h2>WorkforceAI</h2>
+
+<a href="/dashboard">
+<i class="fa fa-chart-line"></i> Dashboard
+</a>
+
+
+<a href="/process3" class="active">
+<i class="fa fa-layer-group"></i> Feature Groups
+</a>
+
+
+
+<a href="/logout">
+<i class="fa fa-sign-out-alt"></i> Logout
+</a>
+
+</div>
+
+
+<!-- MAIN -->
+
+<div class="main">
+
+<!-- NAVBAR -->
+
+<div class="navbar">
+
+<div><b>Feature Classification</b></div>
+<div>Admin Panel</div>
+
+</div>
+
+
+<!-- HEADER -->
+
+<div class="page-header">
+
+<h2><i class="fa fa-layer-group"></i> Feature Classification</h2>
+
+</div>
+
+
+<!-- FEATURE CARDS -->
+
+<div class="features-container">
+
+
+<!-- NUMERICAL FEATURES -->
+
+<div class="feature-card">
+
+<h3><i class="fa fa-calculator"></i> Numerical Features</h3>
+
+<ul class="feature-list">
+
+{% for n in numerical %}
+
+<li>{{n}}</li>
+
+{% endfor %}
+
+</ul>
+
+</div>
+
+
+<!-- CATEGORICAL FEATURES -->
+
+<div class="feature-card">
+
+<h3><i class="fa fa-tags"></i> Categorical Features</h3>
+
+<ul class="feature-list">
+
+{% for c in categorical %}
+
+<li>{{c}}</li>
+
+{% endfor %}
+
+</ul>
+
+</div>
+
+
+<!-- TARGET VARIABLE -->
+
+<div class="feature-card">
+
+<h3><i class="fa fa-bullseye"></i> Target Variable</h3>
+
+<ul class="feature-list">
+
+{% for t in target %}
+
+<li>{{t}}</li>
+
+{% endfor %}
+
+</ul>
+
+</div>
+
+</div>
+
+
+<!-- NEXT BUTTON -->
+
+<div class="next-area">
+
+<a href="/process4" class="next-btn">
+<i class="fa fa-arrow-right"></i> Next Process
+</a>
+
+</div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Feature Extraction - WorkforceAI</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Segoe UI;
+}
+
+body{
+background:#f4f7fb;
+display:flex;
+height:100vh;
+}
+
+/* SIDEBAR */
+
+.sidebar{
+width:240px;
+height:100vh;
+background:#081b4b;
+position:fixed;
+left:0;
+top:0;
+padding:25px 15px;
+color:white;
+}
+
+.sidebar h2{
+text-align:center;
+margin-bottom:40px;
+}
+
+.sidebar a{
+display:flex;
+align-items:center;
+gap:12px;
+padding:14px;
+margin-bottom:12px;
+border-radius:10px;
+color:white;
+text-decoration:none;
+transition:0.3s;
+font-weight:500;
+}
+
+.sidebar a:hover{
+background:white;
+color:#2f3cc8;
+}
+
+.sidebar a.active{
+background:white;
+color:#2f3cc8;
+font-weight:bold;
+}
+
+/* MAIN */
+
+.main{
+margin-left:240px;
+width:calc(100% - 240px);
+height:100vh;
+display:flex;
+flex-direction:column;
+}
+
+/* NAVBAR */
+
+.navbar{
+background:white;
+padding:18px 40px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+box-shadow:0 4px 10px rgba(0,0,0,0.08);
+}
+
+/* HEADER */
+
+.page-header{
+padding:25px 40px 10px 40px;
+}
+
+.page-header h2{
+font-size:26px;
+color:#333;
+}
+
+/* TABLE CARD */
+
+.table-card{
+margin:20px 40px;
+background:white;
+border-radius:16px;
+box-shadow:0 10px 25px rgba(0,0,0,0.08);
+display:flex;
+flex-direction:column;
+height:520px;
+}
+
+/* SCROLL AREA */
+
+.table-scroll{
+overflow:auto;
+flex:1;
+}
+
+/* TABLE */
+
+table{
+border-collapse:collapse;
+width:max-content;
+min-width:100%;
+}
+
+th,td{
+padding:12px 16px;
+border-bottom:1px solid #eee;
+white-space:nowrap;
+}
+
+th{
+background:#2f3cc8;
+color:white;
+font-weight:600;
+position:sticky;
+top:0;
+z-index:5;
+}
+
+tr:hover{
+background:#f5f7ff;
+}
+
+/* NEXT BUTTON */
+
+.next-area{
+padding:0 40px 30px 40px;
+}
+
+.next-btn{
+display:inline-block;
+background:linear-gradient(135deg,#2f3cc8,#5663ff);
+color:white;
+padding:14px 30px;
+border-radius:10px;
+text-decoration:none;
+font-weight:bold;
+transition:0.3s;
+}
+
+.next-btn:hover{
+transform:translateY(-3px);
+box-shadow:0 8px 18px rgba(0,0,0,0.2);
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+
+<div class="sidebar">
+
+<h2>WorkforceAI</h2>
+
+<a href="/dashboard">
+<i class="fa fa-chart-line"></i> Dashboard
+</a>
+
+
+
+<a href="/process4" class="active">
+<i class="fa fa-filter"></i> Feature Extraction
+</a>
+
+
+<a href="/logout">
+<i class="fa fa-sign-out-alt"></i> Logout
+</a>
+
+</div>
+
+
+<!-- MAIN -->
+
+<div class="main">
+
+<!-- NAVBAR -->
+
+<div class="navbar">
+
+<div><b>Feature Extraction</b></div>
+<div>Admin Panel</div>
+
+</div>
+
+
+<!-- HEADER -->
+
+<div class="page-header">
+
+<h2><i class="fa fa-filter"></i> Feature Extraction</h2>
+
+</div>
+
+
+<!-- TABLE CARD -->
+
+<div class="table-card">
+
+<div class="table-scroll">
+
+<table>
+
+<tr>
+
+{% for col in columns %}
+<th>{{col}}</th>
+{% endfor %}
+
+</tr>
+
+{% for row in data %}
+
+<tr>
+
+{% for val in row %}
+<td>{{val}}</td>
+{% endfor %}
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+</div>
+
+</div>
+
+
+<!-- NEXT BUTTON -->
+
+<div class="next-area">
+
+<a href="/process5" class="next-btn">
+<i class="fa fa-arrow-right"></i> Next Process
+</a>
+
+</div>
+
+</div>
+
+</body>
+</html>
